@@ -38,3 +38,5 @@ if response.status_code == 200:
         print(f"연료: {fuel:<8} | 승용: {sedan:>6} | 승합: {bus:>5} | 특수: {special:>5} | 화물: {truck:>6}")
 else:
     print(f"Error: {response.status_code}")
+
+# 정석원

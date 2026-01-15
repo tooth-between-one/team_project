@@ -1,14 +1,13 @@
 import requests
 
-# ae3823b03d788fc0f5107d09b4b50510f15a12e2c342b55c8c3b55962cf2ae73
 
 
-url = "https://api.odcloud.kr/api/15097996/v1/uddi:c6b4e4e2-7548-4e75-b563-b1c100038fc4?page=1&perPage=10&returnType=JSON&serviceKey=ae3823b03d788fc0f5107d09b4b50510f15a12e2c342b55c8c3b55962cf2ae73" 
+url = "https://api.odcloud.kr/api/15097996/v1/uddi:c6b4e4e2-7548-4e75-b563-b1c100038fc4?page=1&perPage=100&returnType=JSON&serviceKey=ae3823b03d788fc0f5107d09b4b50510f15a12e2c342b55c8c3b55962cf2ae73" 
 
 params = {
     "serviceKey": "ae3823b03d788fc0f5107d09b4b50510f15a12e2c342b55c8c3b55962cf2ae73",
     "page": 1,
-    "perPage": 10,
+    "perPage": 100,
     "returnType": "JSON"
 }
 
@@ -27,8 +26,10 @@ for item in items:
     ghkanf = item.get('화물')
     result = item.get('계')
 
-    print(f"연료: {fuel} | 승용: {tmddyd} | 승합: {tmdgkq} | 특수: {xmrtn} | 화물: {ghkanf} | 합계: {result}")       # 출력
+    print(f"시군구별: {place} | 연료별: {fuel} | 승용: {tmddyd} | 승합: {tmdgkq} | 특수: {xmrtn} | 화물: {ghkanf} | 합계: {result}")       # 출력
 
 
 print("*"*50)
 print(items[0].keys()) # 딕셔너리 키값 확인
+
+##ㅇㅁㄴㄹㅇㅁ

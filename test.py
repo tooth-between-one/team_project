@@ -33,3 +33,4 @@ print("*"*50)
 print(items[0].keys()) # 딕셔너리 키값 확인
 
 ##ㅇㅁㄴㄹㅇㅁ
+print('제발')

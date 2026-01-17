@@ -54,13 +54,6 @@ folium.GeoJson(
     popup_keep_highlighted=True,
 ).add_to(m)
 
-# 출력
+
+# 지도 정보 
 map_data = st_folium(m, width=800, height=600)
-
-if map_data:
-    st.write(map_data)
-
-map_data["last_active_drawing"]["properties"]["SIG_KOR_NM"]
-
-
-# 이거 수정 중이니까 건들이지 마세요 

@@ -29,7 +29,7 @@ df = pd.DataFrame(data)
 st.header("1. 우리 동네가 얼마나 뜨거운지 확인해봐요 !! ")
 selected_gu = st.selectbox("자치구를 선택하세요", df['지역'])
 
-# 데이터 계산 - 잼민이햄 도움
+# 데이터 계산 
 my_data = df[df['지역'] == selected_gu]
 my_count = my_data['차량수'].values[0]
 max_count = df['차량수'].max()

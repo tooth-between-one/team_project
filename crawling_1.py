@@ -21,6 +21,7 @@ FAQ_btn.click()
 time.sleep(1)
 
 
+items =[]
 titles = driver.find_elements(By.CSS_SELECTOR,'div.title')
 # for title in titles:
 #     print(title.text)
@@ -30,6 +31,10 @@ answers = driver.find_elements(By.CSS_SELECTOR, 'div.faq_con div:not(.answer)')
 #     print(answer.text)
 
 for title,answer in zip(titles, answers):
+    items.append({
+            'title' : title.text,
+            'answer' : answer.text
+    })
     print(title.text)
     print(answer.text)
     print("-"*40)

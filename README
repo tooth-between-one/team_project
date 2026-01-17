@@ -1,0 +1,12 @@
+"""
+코드 실행 순서
+
+1. data.csv 파일을 `C:/ProgramData/MySQL/MySQL Server 8.0/Uploads` 경로에 복사
+2. create_table.sql 실행  
+    - 기존 테이블 삭제 후 재생성(auto_increment 설정 위해)
+3. insert_table.sql 실행  
+    - local, car, fuel_info 테이블에 데이터 삽입
+4. insert_table2.sql 실행  
+    - CSV 적재를 위한 임시 테이블(reg_tmp) 생성 후 reg_info 테이블에 데이터 삽입
+
+"""

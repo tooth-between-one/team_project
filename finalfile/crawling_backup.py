@@ -73,3 +73,4 @@ with open(json_file_name, "w", encoding="utf-8") as f:
     json.dump([item.to_dict() for item in result_list], f, ensure_ascii=False, indent=4)
 
 
+

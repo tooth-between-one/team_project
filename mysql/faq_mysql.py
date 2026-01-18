@@ -48,7 +48,6 @@ for i, box in enumerate(boxes, 1):
 driver.quit()
 
 # 저장
-
 conn = pymysql.connect(
     host="localhost",
     user="ohgiraffers",     

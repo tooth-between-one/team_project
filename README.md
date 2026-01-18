@@ -46,7 +46,7 @@
 | 구분 | 기술 |
 | :--- | :--- |
 | **Language** | ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white) |
-| **Data** | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=Pandas&logoColor=white) ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=flat-square&logo=Selenium&logoColor=white) ![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-6DB33F?style=flat-square) | ![Folium](https://img.shields.io/badge/Folium-77B829?style=flat-square&logo=Folium&logoColor=white) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=Streamlit&logoColor=white) |
+| **Data** | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=Pandas&logoColor=white) ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=flat-square&logo=Selenium&logoColor=white) ![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-6DB33F?style=flat-square) ![Folium](https://img.shields.io/badge/Folium-77B829?style=flat-square&logo=Folium&logoColor=white) | ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=Streamlit&logoColor=white) |
 | **Web** | ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=Streamlit&logoColor=white) |
 | **Database** | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white) |
 

@@ -1,80 +1,112 @@
+
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
-from datetime import datetime
 import csv
 import json
 
-# 데이터 클래스
-class ECOFQAEntry:
-    def __init__(self, title, answer):
-        self.title = title
-        self.answer = answer
-    # 딕셔너리 저장
-    def to_dict(self):
-        return {"title": self.title, "answer": self.answer}
+driver = webdriver.Chrome()
+wait = WebDriverWait(driver, 10)
 
-driver = webdriver.Chrome() 
-url = "https://ev.or.kr/nportal/partcptn/initFaqAction.do" 
+url = "https://ev.or.kr/nportal/partcptn/initFaqAction.do"
 driver.get(url)
 time.sleep(2)
 
-result_list = []
-page_num = 1
+results = []
+seen = set()  # (category, question) 중복 방지용
 
 try:
     while True:
-        time.sleep(2) 
-        faq_titles = driver.find_elements(By.CSS_SELECTOR, 'div.title')
-        faq_answers = driver.find_elements(By.CSS_SELECTOR, 'div.faq_con div:not(.answer)')
+        time.sleep(1)
 
-        for title, answer in zip(faq_titles, faq_answers):
-            info = ECOFQAEntry(title.text.strip(), answer.text.strip())
-            result_list.append(info)
+        
+        faq_blocks = driver.find_elements(By.CSS_SELECTOR, "div.board_faq")
 
-        #   다음 페이지 버튼 클릭
+        for block in faq_blocks:
+            # category_name: span.faq_badge (색상 클래스가 달라도 faq_badge는 공통)
+            try:
+                category = block.find_element(By.CSS_SELECTOR, "span.faq_badge").text.strip()
+            except:
+                category = "기타"
+
+            # question: div.title
+            try:
+                question = block.find_element(By.CSS_SELECTOR, "div.title").text.strip()
+            except:
+                question = ""
+
+            if not question:
+                continue
+
+            
+            try:
+                title_area = block.find_element(By.CSS_SELECTOR, "div.faq_title")
+                driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", title_area)
+                time.sleep(0.2)
+                title_area.click()
+                time.sleep(0.2)
+            except:
+                pass
+
+            # answer: div.faq_con
+            try:
+                answer = block.find_element(By.CSS_SELECTOR, "div.faq_con").text.strip()
+            except:
+                answer = ""
+
+            # 중복 방지
+            key = (category, question)
+            if key in seen:
+                continue
+            seen.add(key)
+
+            results.append({
+                "category_name": category,
+                "question": question,
+                "answer": answer
+            })
+
+        
         try:
-            next_arrow = driver.find_element(By.CSS_SELECTOR, "a.next.arrow")
-            
-            btn_href = next_arrow.get_attribute("href")
-            
+            next_btn = driver.find_element(By.CSS_SELECTOR, "a.next.arrow")
+            btn_href = next_btn.get_attribute("href") or ""
+            btn_class = next_btn.get_attribute("class") or ""
+
+            # 비활성화면 종료 (사이트에 따라 disable/disabled가 붙는 경우가 많음)
+            if "disable" in btn_class or "disabled" in btn_class:
+                break
+
+            # href가 javascript:goPage(...) 형태면 다음으로 넘어갈 수 있음
             if "javascript:goPage" in btn_href:
-
-                driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", next_arrow)
-                time.sleep(1)
-                
-                next_arrow.click()
-                page_num += 1
-
-                time.sleep(2) 
+                driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", next_btn)
+                time.sleep(0.5)
+                next_btn.click()
+                time.sleep(2)
             else:
                 break
-                
+
         except:
             break
 
 finally:
     driver.quit()
 
-#   파일저장용
-now_time = datetime.now().strftime("%y%m%d_%H%M%S")
-csv_file_name = f"faq_{now_time}.csv"
-json_file_name = f"faq_{now_time}.json"
 
-#   CSV 저장 
+csv_file_name = "ev_faq.csv"
+json_file_name = "ev_faq.json"
+
 with open(csv_file_name, "w", encoding="utf-8-sig", newline="") as f:
-    writer = csv.DictWriter(f, fieldnames=["title", "answer"])
+    writer = csv.DictWriter(f, fieldnames=["category_name", "question", "answer"])
     writer.writeheader()
-    writer.writerows([item.to_dict() for item in result_list])
+    writer.writerows(results)
 
-#   JSON 저장 
 with open(json_file_name, "w", encoding="utf-8") as f:
-    json.dump([item.to_dict() for item in result_list], f, ensure_ascii=False, indent=4)
+    json.dump(results, f, ensure_ascii=False, indent=4)
 
-# 아직 저장위치 설정전 깃 테스트
-
-
-
+print(f"저장 완료: {len(results)}개")
+print("CSV:", csv_file_name)
+print("JSON:", json_file_name)
 
 

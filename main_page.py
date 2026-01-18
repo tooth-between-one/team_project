@@ -23,12 +23,13 @@ menu = st.sidebar.radio(
     label_visibility="collapsed"
 )
 
+# 메인 페이지
 if menu == "🚗 등록 현황":
     st.title("서울특별시 자치구별 연료별 차량 등록 현황")
     st.subheader("🚗(부릉)🚗")
     st.caption("이 사이트는 서울특별시의 자치구별 연료별 차량 등록 현황을 통해 친환경 차량 사용을 권유하기 위한 사이트입니다.")
     
-    st.header("🚗 등록 현황")
+    st.header("서울특별시 지도")
     
     # DB 연결
     connection = mysql.connector.connect(
@@ -82,8 +83,9 @@ if menu == "🚗 등록 현황":
             local_name = feature["properties"].get("SIG_KOR_NM")
             # st.write(local_name)
 
-            st.markdown("---")
-            st.header(f"📍 {local_name} 상세 통계")
+            # st.markdown("---")
+            st.divider()
+            st.header(f"📍 {local_name} 연료별 차량 등록 현황")
             
             cursor = connection.cursor()
 
@@ -112,8 +114,6 @@ if menu == "🚗 등록 현황":
             df["car_num"] = pd.to_numeric(df["car_num"]).astype(int)
 
             # 그래프 출력
-            st.header(f"{local_name} 연료별 차량 등록 현황")
-            # st.subheader(local_name)
             chart_df = df[["fuel_name", "car_num"]].set_index("fuel_name")
             st.bar_chart(chart_df)
 
@@ -124,7 +124,7 @@ if menu == "🚗 등록 현황":
     else:
         st.info("지도에서 자치구를 클릭하면 상세 등록 현황을 확인할 수 있습니다.")
 
-# --- 2. 자동차 보험 FAQ 페이지 ---
+# FAQ 페이지
 elif menu == "🔍 자동차 보험 FAQ":
     st.title("🔍 자동차 보험 FAQ")
     st.markdown("---")

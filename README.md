@@ -1,0 +1,79 @@
+# 🚗 ROKa-T: Republic Of Korea Automobile Thermometer
+
+> **"데이터로 측정하는 도시 에너지의 온도계"** > 서울시 25개 자치구의 자동차 연료 사용량을 '온도'라는 직관적인 지표로 시각화하여, 자동차 등록 증가가 환경에 주는 부담을 체감하게 하는 공감형 데이터 플랫폼입니다.
+
+---
+
+## 1. 팀 소개 🦷
+**팀명 : tooth 사이에 낀 1**
+
+| 이름 | 역할 | GitHub |
+| :--- | :--- | :--- |
+| **김민준** | 팀장 / 데이터 전처리 및 DB 구축 | [🔗 miin-jun](https://github.com/miin-jun) |
+| **정석원** | 데이터 수집 (Crawling) 및 정제 | [🔗 jeong_SW](https://github.com/jeong_SW) |
+| **최하진** | UI/UX 디자인 및 시각화 로직 구현 | [🔗 hun668486](https://github.com/hun668486) |
+| **최현진** | 웹 대시보드 개발 (Streamlit) | [🔗 lifeisgoodlg](https://github.com/lifeisgoodlg) |
+| **황인규** | 데이터 분석 및 프로젝트 기획 | [🔗 hwang-in-kyu](https://github.com/hwang-in-kyu) |
+
+---
+
+## 2. 프로젝트 개요
+
+### 📍 프로젝트 정보
+* **진행 기간:** 2026.01.16 ~ 2026.01.19
+* **핵심 컨셉:** 서울시 자치구별 자동차 연료 소비 데이터를 온도 지표로 표준화하여 시각화
+
+### 💡 프로젝트 필요성
+* **지구 온난화 체감 부족:** 단순 수치 데이터는 환경 오염의 심각성을 전달하기에 한계가 있음.
+* **지역별 데이터 격차:** 자치구별로 상이한 연료 소비 구조를 한눈에 비교할 지표가 부족함.
+
+### 🎯 프로젝트 목표
+1. **시각적 지표화**: 연료 소비량을 '온도'에 비유하여 대중의 경각심 고취 및 대중교통 이용 유도.
+2. **데이터 표준화**: 연료 종류별 소비량을 비교 가능하도록 지수화.
+3. **지역 특성 파악**: 자치구별 자동차 에너지 소비 패턴 분석.
+4. **정책 근거 마련**: 친환경 모빌리티 전환을 위한 데이터 기반 근거 제공.
+
+### 👥 주요 타겟 사용자
+* **🏛 지자체 담당자**: 서울시 및 구청 환경·교통 정책 수립 기초 자료 활용.
+* **⚡ 기업 기획자**: EV 충전소, 수소차 등 친환경 모빌리티 비즈니스 기획.
+* **📊 데이터 분석가**: ESG 경영 및 탄소 배출권 관련 연구.
+* **🌱 일반 시민**: 거주 지역의 에너지 소비 현황 파악 및 환경 보호 참여.
+
+---
+
+## 3. 기술 스택 (Tech Stack)
+
+| 구분 | 기술 |
+| :--- | :--- |
+| **Language** | ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white) |
+| **Data** | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=Pandas&logoColor=white) ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=flat-square&logo=Selenium&logoColor=white) ![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-6DB33F?style=flat-square) |
+| **Web** | ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=Streamlit&logoColor=white) |
+| **Database** | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white) |
+
+---
+
+## 4. 데이터베이스 구조 (ERD)
+
+*(※ 리포지토리에 업로드한 이미지 파일명과 일치해야 사진이 나타납니다.)*
+
+### 📋 주요 테이블 명세
+* **연료 정보**: 휘발유, 경유 등 연료 타입 관리.
+* **차량 정보**: 승용, 승합, 화물 등 차량 종류 관리.
+* **자치구 정보**: 서울시 25개 자치구 기본 정보.
+* **등록 현황**: 지역/날짜/연료/차량별 **등록 대수 및 소비 데이터**를 담은 메인 테이블.
+
+---
+
+## 5. 주요 프로시저 및 수행 결과
+1. **Data Pipeline**: 공공데이터 포털 데이터를 Selenium으로 수집 후 MySQL 연동.
+2. **Standardization**: 소비량을 기반으로 0~100 사이의 '온도 지수' 산출 로직 적용.
+3. **Visualization**: Streamlit Map 및 Chart를 활용하여 자치구별 온도 시뮬레이션 구현.
+
+---
+
+## 6. 한 줄 회고
+* **김민준**: "데이터 정규화와 관계 설계를 통해 효율적인 DB 구조의 중요성을 깨달았습니다."
+* **정석원**: "실제 동적 웹 크롤링을 수행하며 데이터 수집의 다양한 예외 상황을 해결하는 법을 배웠습니다."
+* **최하진**: "복잡한 데이터를 사용자에게 어떻게 직관적으로 전달할지 고민하며 시각화 역량을 키웠습니다."
+* **최현진**: "Streamlit을 사용해 빠르게 프로토타입을 제작하며 백엔드와 프론트엔드의 연결을 경험했습니다."
+* **황인규**: "환경이라는 사회적 이슈를 데이터로 풀어내는 과정에서 분석의 가치를 발견했습니다."

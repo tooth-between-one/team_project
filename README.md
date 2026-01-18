@@ -8,7 +8,7 @@
 **팀명 : TOOTH 사이에 낀 1**
 
 | 아바타 | ![image.png] | ![image.png] | ![image.png] | ![image.png] | ![image.png] |
-| --- | --- | --- | --- | --- | --- |
+| :---: | :---: | :---: | :---: | :---: | :---: |
 | 이름 | **김민준** | **정석원** | **최하진** | **최현진** | **황인규** |
 | GitHub | [🔗 miin-jun](https://github.com/miin-jun) | [🔗 jeong_SW](https://github.com/jeong_SW) | [🔗 hun668486](https://github.com/hun668486) | [🔗 lifeisgoodlg](https://github.com/lifeisgoodlg) | [🔗 hwang-in-kyu](https://github.com/hwang-in-kyu) |
 

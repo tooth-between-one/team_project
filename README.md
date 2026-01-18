@@ -7,13 +7,13 @@
 ## 1. 팀 소개 🦷
 **팀명 : TOOTH 사이에 낀 1**
 
-| 이름 | 역할 | GitHub |
-| :--- | :--- | :--- |
-| **김민준** | .. | [🔗 miin-jun](https://github.com/miin-jun) |
-| **정석원** | .. | [🔗 jeong_SW](https://github.com/jeong_SW) |
-| **최하진** | .. | [🔗 hun668486](https://github.com/hun668486) |
-| **최현진** | .. | [🔗 lifeisgoodlg](https://github.com/lifeisgoodlg) |
-| **황인규** | .. | [🔗 hwang-in-kyu](https://github.com/hwang-in-kyu) |
+| 이름 | GitHub |
+| :--- | :--- |
+| **김민준** | [🔗 miin-jun](https://github.com/miin-jun) |
+| **정석원** | [🔗 jeong_SW](https://github.com/jeong_SW) |
+| **최하진** | [🔗 hun668486](https://github.com/hun668486) |
+| **최현진** | [🔗 lifeisgoodlg](https://github.com/lifeisgoodlg) |
+| **황인규** | [🔗 hwang-in-kyu](https://github.com/hwang-in-kyu) |
 
 ---
 

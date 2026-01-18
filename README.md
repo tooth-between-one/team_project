@@ -62,11 +62,11 @@
   
 ### 4_01 차량 등록 조회 ERD 다이어그램
 
-![image.png](attachment:f531af0f-7079-49f1-bf09-6a97ecf17dbc:image.png)
+![image.png](./data/car_search_ERD.png)
 
 ### 4_02 FAQ ERD 다이어그램
 
-![image.png](attachment:25755a24-8a46-4ded-9563-917069c779f8:image.png)
+![image.png](./data/FAQ_ERD.png)
 
 
 ---

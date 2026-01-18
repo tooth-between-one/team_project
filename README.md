@@ -9,11 +9,11 @@
 
 | 이름 | 역할 | GitHub |
 | :--- | :--- | :--- |
-| **김민준** | 팀장 / 데이터 전처리 및 DB 구축 | [🔗 miin-jun](https://github.com/miin-jun) |
-| **정석원** | 데이터 수집 (Crawling) 및 정제 | [🔗 jeong_SW](https://github.com/jeong_SW) |
-| **최하진** | UI/UX 디자인 및 시각화 로직 구현 | [🔗 hun668486](https://github.com/hun668486) |
-| **최현진** | 웹 대시보드 개발 (Streamlit) | [🔗 lifeisgoodlg](https://github.com/lifeisgoodlg) |
-| **황인규** | 데이터 분석 및 프로젝트 기획 | [🔗 hwang-in-kyu](https://github.com/hwang-in-kyu) |
+| **김민준** | .. | [🔗 miin-jun](https://github.com/miin-jun) |
+| **정석원** | .. | [🔗 jeong_SW](https://github.com/jeong_SW) |
+| **최하진** | .. | [🔗 hun668486](https://github.com/hun668486) |
+| **최현진** | .. | [🔗 lifeisgoodlg](https://github.com/lifeisgoodlg) |
+| **황인규** | .. | [🔗 hwang-in-kyu](https://github.com/hwang-in-kyu) |
 
 ---
 

@@ -19,7 +19,7 @@ st.sidebar.title("자동차 데이터 통합 시스템")
 
 menu = st.sidebar.radio(
     "메뉴 선택",
-    ("🚗 등록 현황", "🔍 현대자동차 FAQ", "🌳 EV무공해차 통합누리집"),
+    ("🚗 등록 현황", "🔍 현대자동차 FAQ", "🌳 EV무공해차 통합누리집 <보험금>FAQ"),
     label_visibility = "collapsed"
 )
 
@@ -39,7 +39,7 @@ if menu == "🚗 등록 현황":
         charset = "utf8mb4"
     )
 
-    with open("서울_자치구_경계_2017.geojson", encoding="utf-8") as json_file:
+    with open("data/서울_자치구_경계_2017.geojson", encoding="utf-8") as json_file:
         geojson_data = json.load(json_file)
 
     m = folium.Map(
@@ -156,7 +156,7 @@ elif menu == "🔍 현대자동차 FAQ":
     st.markdown("---")
 
     try:
-        with open("hyundai_faq.json", "r", encoding="utf-8") as f:
+        with open("data/hyundai_faq.json", "r", encoding="utf-8") as f:
             faq_data = json.load(f)
 
         category_list = []
@@ -183,6 +183,35 @@ elif menu == "🔍 현대자동차 FAQ":
     except Exception as e:
         st.error(f"오류가 발생했습니다: {e}")
 
-elif menu == "🌳 EV무공해차 통합누리집" :
-    st.title("🌳 EV무공해차 통합누리집 보험금 / FAQ")
+elif menu == "🌳 EV무공해차 통합누리집 <보험금>FAQ":
+    st.title("🌳 EV무공해차 통합누리집 <보험금> / FAQ")
+    st.markdown("---")
+
+    try:
+        file_name = "crawling/ev_faq.json"   
+        
+
+        with open(file_name, "r", encoding="utf-8") as f:
+            faq_data = json.load(f)
+
+        # ✅ 카테고리 목록 만들기 (중복 제거)
+        category_list = []
+        for item in faq_data:
+            category_list.append(item["category_name"])
+
+        categories = sorted(list(set(category_list)))
+
+        selected_category = st.selectbox("카테고리를 선택하세요", ["전체"] + categories)
+        st.write("")  # 간격 띄우기
+
+        # ✅ 카테고리 필터링 + 질문/답 출력
+        for item in faq_data:
+            if selected_category == "전체" or item["category_name"] == selected_category:
+                with st.expander(f"[{item['category_name']}] {item['question']}"):
+                    st.write(item["answer"])
+
+    except FileNotFoundError:
+        st.error("faq 파일을 찾을 수 없습니다. 파일 경로를 확인해주세요.")
+    except Exception as e:
+        st.error(f"오류가 발생했습니다: {e}")
     

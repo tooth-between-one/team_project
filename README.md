@@ -82,8 +82,11 @@
 ---
 ## 7. 수행결과(시연페이지)
 
-![image.png](./data/final_try1.png)
 ![image.png](./data/final_try2.png)
+![image.png](./data/final_try1.png)
+
+---
+
 ![image.png](./data/final_try3.png)
 ![image.png](./data/final_try4.png)
 ![image.png](./data/final_try5.png)

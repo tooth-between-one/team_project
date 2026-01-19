@@ -1,6 +1,6 @@
 # 🚗 ROKa-T: Republic Of Korea Automobile Thermometer
 
-> **"차량 등록 데이터로 측정하는 도시 환경오염의 지표"** > 
+> < **"차량 등록 데이터로 측정하는 도시 환경오염의 지표"** > 
 ---
 
 ## 1. 팀 소개 🦷

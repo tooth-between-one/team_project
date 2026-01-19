@@ -84,7 +84,7 @@
 
 ### < 메인페이지 >
 
-![image.png](./data/final_try1.png)
+![image.png](./data/final_try6.png)
 ![image.png](./data/final_try2.png)
 
 ---

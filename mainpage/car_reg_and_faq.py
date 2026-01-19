@@ -8,6 +8,7 @@ https://github.com/lifeisgoodlg/Korea_District/tree/master
 
 import json
 import folium
+import altair as alt
 import mysql.connector
 import streamlit as st
 import pandas as pd
@@ -18,22 +19,31 @@ from streamlit_folium import st_folium
 # =========================
 st.set_page_config(layout="wide")
 
-st.sidebar.title("자동차 데이터 통합 시스템")
+st.sidebar.title("ROKa_T")
+
+if "menu" not in st.session_state:
+    st.session_state.menu = "🚗 등록 현황"
+
+menu_options = ("🚗 등록 현황", "🔍 현대자동차 FAQ", "🌳 EV무공해차 통합누리집")
+
 menu = st.sidebar.radio(
     "메뉴 선택",
-    ("🚗 등록 현황", "🔍 현대자동차 FAQ", "🌳 EV무공해차 통합누리집"),
+    menu_options,
+    index=menu_options.index(st.session_state.menu),
     label_visibility="collapsed"
 )
+
+st.session_state.menu = menu
+
 
 # =========================
 # 🚗 등록 현황 페이지
 # =========================
 if menu == "🚗 등록 현황":
-    st.title("서울특별시 자치구별 연료별 차량 등록 현황")
-    st.subheader("🚗(부릉)🚗")
-    st.caption("자치구별 차량 등록 현황을 통해 친환경 차량 사용을 유도합니다.")
+    st.title("ROKa-T", text_alignment="center")
+    st.subheader("🚗차량 등록 데이터로 측정하는 도시 환경오염의 지표🚗")
+    st.markdown("원하는 지역에 마우스를 대보세요! 🖱️  \n우리 지역의 자동차 등록현황과 연료 사용량을 확인할 수 있어요 🔍 ")
 
-    # DB 연결
     connection = mysql.connector.connect(
         host="localhost",
         user="ohgiraffers",
@@ -42,11 +52,9 @@ if menu == "🚗 등록 현황":
         charset="utf8mb4"
     )
 
-    # GeoJSON 로드
     with open("../data/seoul_2017.geojson", encoding="utf-8") as f:
         geojson_data = json.load(f)
 
-    # 지도 생성
     m = folium.Map(
         location=[37.5642135, 127.0016985],
         zoom_start=11
@@ -97,20 +105,36 @@ if menu == "🚗 등록 현황":
             df = pd.DataFrame(result, columns=["local_name", "fuel_name", "car_num"])
             df["car_num"] = pd.to_numeric(df["car_num"]).fillna(0).astype(int)
 
-            # ---------- 그래프 ----------
             with col2:
                 st.subheader(f"{local_name} 연료별 차량 등록 현황")
-                chart_df = df[["fuel_name", "car_num"]].set_index("fuel_name")
-                st.bar_chart(chart_df)
 
-            # ---------- CO2 분석 ----------
+                chart_df = df[["fuel_name", "car_num"]]
+
+                chart = (
+                    alt.Chart(chart_df)
+                    .mark_bar()
+                    .encode(
+                        x=alt.X(
+                            "fuel_name:N",
+                            title="연료",
+                            axis=alt.Axis(labelAngle=0)  # 가로축 글씨 가로
+                        ),
+                        y=alt.Y(
+                            "car_num:Q",
+                            title="등록 대수"
+                        )
+                    )
+                )
+
+                st.altair_chart(chart, use_container_width=True)
+
             co2_factor = {
-                "수소": 0,
-                "하이브리드": 70,
-                "CNG": 120,
-                "엘피지": 125,
+                "휘발유": 140,
                 "경유": 130,
-                "휘발유": 140
+                "엘피지": 125,
+                "CNG": 120,
+                "하이브리드": 70,
+                "수소": 0
             }
 
             df["co2_factor"] = df["fuel_name"].map(co2_factor).fillna(0)
@@ -123,15 +147,36 @@ if menu == "🚗 등록 현황":
             col3, col4 = st.columns(2, gap="large")
 
             with col3:
-                st.subheader("연료별 CO₂ 배출 계수")
-                for fuel, value in co2_factor.items():
-                    st.write(f"{fuel}: {value} g/km")
+                st.subheader("연료별 CO₂(g/kg) 배출 순위")
+                for i, (fuel, value) in enumerate(co2_factor.items(), start=1):
+                    st.write(f"{i}. {fuel}: {value} g/km")
                     st.progress(value / 140)
 
+                with st.container(border=True):
+                    st.subheader("🚗 연 15,000km 주행 기준")
+        
+                    c1, c2 = st.columns(2)
+                    c1.metric("가솔린", "2.1톤")
+                    c2.metric("하이브리드", "1.05톤")
+                    
+                    st.divider()
+                    st.markdown("#### ❓ 이 1톤이 어느 정도냐면?")
+                    
+                    comparison_data = {
+                        "환산 기준": ["소나무 흡수량", "성인 1인 연간 호흡 배출", "석탄 발전 전력", "비행기 서울↔부산"],
+                        "수치": ["약 150그루 / 1년", "약 2톤", "약 400 kWh", "약 20회"]
+                    }
+                    st.table(pd.DataFrame(comparison_data))
             with col4:
-                st.subheader("CO₂ 추정 배출량")
-                st.metric("총합", f"{total_co2:,}")
+                st.subheader('⬇️ 이 지역의 배출량💨')
+                st.metric("총합(CO₂ 추정 배출량)", f"{total_co2:,}")
+                st.subheader('⬇️ 이 지역의 온도🌡️')
                 st.metric("차량 1대당 평균", f"{avg_co2:,.2f}")
+                st.image('../data/car_car.png')
+
+            if st.button("🌳 EV무공해차 통합누리집으로 이동"):
+                st.session_state.menu = "🌳 EV무공해차 통합누리집"
+                st.rerun()
 
             cursor.close()
             connection.close()
@@ -165,7 +210,8 @@ elif menu == "🔍 현대자동차 FAQ":
 # 🌳 EV 무공해차 FAQ
 # =========================
 elif menu == "🌳 EV무공해차 통합누리집":
-    st.title("🌳 EV 무공해차 보험 FAQ")
+    st.title("🌳 EV 무공해차 FAQ")
+    st.image("../data/money.png")
     st.divider()
 
     try:
@@ -182,5 +228,3 @@ elif menu == "🌳 EV무공해차 통합누리집":
 
     except Exception as e:
         st.error(e)
-        
-        #test

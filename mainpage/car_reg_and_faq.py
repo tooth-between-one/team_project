@@ -8,6 +8,7 @@ https://github.com/lifeisgoodlg/Korea_District/tree/master
 
 import json
 import folium
+import altair as alt
 import mysql.connector
 import streamlit as st
 import pandas as pd
@@ -18,19 +19,35 @@ from streamlit_folium import st_folium
 # =========================
 st.set_page_config(layout="wide")
 
-st.sidebar.title("자동차 데이터 통합 시스템")
+st.sidebar.title("ROKa_T")
+# menu = st.sidebar.radio(
+#     "메뉴 선택",
+#     ("🚗 등록 현황", "🔍 현대자동차 FAQ", "🌳 EV무공해차 통합누리집"),
+#     label_visibility="collapsed"
+# )
+
+if "menu" not in st.session_state:
+    st.session_state.menu = "🚗 등록 현황"
+
+menu_options = ("🚗 등록 현황", "🔍 현대자동차 FAQ", "🌳 EV무공해차 통합누리집")
+
 menu = st.sidebar.radio(
     "메뉴 선택",
-    ("🚗 등록 현황", "🔍 현대자동차 FAQ", "🌳 EV무공해차 통합누리집"),
+    menu_options,
+    index=menu_options.index(st.session_state.menu),
     label_visibility="collapsed"
 )
+
+# radio에서 바뀐 값 다시 session_state에 반영
+st.session_state.menu = menu
+
 
 # =========================
 # 🚗 등록 현황 페이지
 # =========================
 if menu == "🚗 등록 현황":
-    st.title("서울특별시 자치구별 연료별 차량 등록 현황")
-    st.subheader("🚗(부릉)🚗")
+    st.title("ROKa-T", text_alignment="center")
+    st.subheader("🚗차량 등록 데이터로 측정하는 도시 환경오염의 지표🚗")
     st.caption("자치구별 차량 등록 현황을 통해 친환경 차량 사용을 유도합니다.")
 
     # DB 연결
@@ -98,10 +115,33 @@ if menu == "🚗 등록 현황":
             df["car_num"] = pd.to_numeric(df["car_num"]).fillna(0).astype(int)
 
             # ---------- 그래프 ----------
+            # with col2:
+            #     st.subheader(f"{local_name} 연료별 차량 등록 현황")
+            #     chart_df = df[["fuel_name", "car_num"]].set_index("fuel_name")
+            #     st.bar_chart(chart_df)
+
             with col2:
                 st.subheader(f"{local_name} 연료별 차량 등록 현황")
-                chart_df = df[["fuel_name", "car_num"]].set_index("fuel_name")
-                st.bar_chart(chart_df)
+
+                chart_df = df[["fuel_name", "car_num"]]
+
+                chart = (
+                    alt.Chart(chart_df)
+                    .mark_bar()
+                    .encode(
+                        x=alt.X(
+                            "fuel_name:N",
+                            title="연료",
+                            axis=alt.Axis(labelAngle=0)  # 가로축 글씨 가로
+                        ),
+                        y=alt.Y(
+                            "car_num:Q",
+                            title="등록 대수"
+                        )
+                    )
+                )
+
+                st.altair_chart(chart, use_container_width=True)
 
             # ---------- CO2 분석 ----------
             co2_factor = {
@@ -132,6 +172,10 @@ if menu == "🚗 등록 현황":
                 st.subheader("CO₂ 추정 배출량")
                 st.metric("총합", f"{total_co2:,}")
                 st.metric("차량 1대당 평균", f"{avg_co2:,.2f}")
+
+            if st.button("🌳 EV무공해차 통합누리집으로 이동"):
+                st.session_state.menu = "🌳 EV무공해차 통합누리집"
+                st.rerun()
 
             cursor.close()
             connection.close()
@@ -165,7 +209,7 @@ elif menu == "🔍 현대자동차 FAQ":
 # 🌳 EV 무공해차 FAQ
 # =========================
 elif menu == "🌳 EV무공해차 통합누리집":
-    st.title("🌳 EV 무공해차 보험 FAQ")
+    st.title("🌳 EV 무공해차 FAQ")
     st.divider()
 
     try:

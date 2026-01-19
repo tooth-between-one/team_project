@@ -94,11 +94,9 @@
 
 ---
 
-### < 무공해차량 FAQ >
+### < EV 무공해차 FAQ >
 ![image.png](./data/final_try4.png)
 ![image.png](./data/final_try5.png)
-
-
 
 ---
 

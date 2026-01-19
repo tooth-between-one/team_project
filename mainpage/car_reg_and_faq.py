@@ -43,7 +43,7 @@ if menu == "🚗 등록 현황":
     )
 
     # GeoJSON 로드
-    with open("seoul_2017.geojson", encoding="utf-8") as f:
+    with open("../data/seoul_2017.geojson", encoding="utf-8") as f:
         geojson_data = json.load(f)
 
     # 지도 생성
@@ -147,7 +147,7 @@ elif menu == "🔍 현대자동차 FAQ":
     st.divider()
 
     try:
-        with open("hyundai_faq.json", encoding="utf-8") as f:
+        with open("../data/hyundai_faq.json", encoding="utf-8") as f:
             faq_data = json.load(f)
 
         categories = sorted({item["category_name"] for item in faq_data})
@@ -169,7 +169,7 @@ elif menu == "🌳 EV무공해차 통합누리집":
     st.divider()
 
     try:
-        with open("ev_faq.json", encoding="utf-8") as f:
+        with open("../data/ev_faq.json", encoding="utf-8") as f:
             faq_data = json.load(f)
 
         categories = sorted({item["category_name"] for item in faq_data})

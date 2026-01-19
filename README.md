@@ -53,8 +53,14 @@
 
 ---
 ## 4. WBS
+
+![image.png](./data/WBS.png)
+
 ---
 ## 5. 요구사항 명세서
+
+![image.png](./data/요구사항.png)
+
 ---
 
 ## 6. 데이터베이스 구조 (ERD)

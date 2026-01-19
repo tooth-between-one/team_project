@@ -54,7 +54,7 @@
 ---
 ## 4. WBS
 
-![image.png](./data/WBS.png) width"70%"
+![image.png](./data/WBS.png)
 
 ---
 ## 5. 요구사항 명세서

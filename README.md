@@ -6,7 +6,7 @@
 ## 1. 팀 소개 🦷
 **팀명 : TOOTH 사이에 낀 1**
 
-| 아바타 | ![image.png] | ![image.png] | ![image.png] | ![image.png] | ![image.png] |
+| 아바타 | ![image.png](.data/minjuns.jpg) | ![image.png](./data/seokwons.png) | ![image.png](./data/hajins.jpg) | ![image.png](./data/hunjins.png) | ![image.png](./data/inkys.jpg) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 이름 | **김민준** | **정석원** | **최하진** | **최현진** | **황인규** |
 | GitHub | [🔗 miin-jun](https://github.com/miin-jun) | [🔗 JeongSW123](https://github.com/JeongSW123) | [🔗 hun668486](https://github.com/hun668486) | [🔗 lifeisgoodlg](https://github.com/lifeisgoodlg) | [🔗 hwang-in-kyu](https://github.com/hwang-in-kyu) |
